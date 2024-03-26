@@ -3224,8 +3224,7 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
                 out1 += Text(address1, address_imm_fmt)
                 out2 += Text(address2, address_imm_fmt)
         elif line1 and line2:
-            print(line1.diff_row, line2.diff_row)
-            line_prefix = "|"
+            line_prefix = line1.diff_row + " @@ " + line2.diff_row
             line_color1 = line_color2 = sym_color = BasicFormat.DIFF_CHANGE
             out1 = out1.reformat(line_color1)
             out2 = out2.reformat(line_color2)
