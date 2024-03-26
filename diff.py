@@ -2705,6 +2705,9 @@ def process(dump: str, config: Config) -> List[Line]:
         if not config.score_stack_differences:
             scorable_line = re.sub(arch.re_sprel, "addr(sp)", scorable_line)
 
+        pool_match = re.search(ARM32_LOAD_POOL_PATTERN, row)
+        if pool_match:
+            row = processor.normalize(mnemonic, row)
         row = re.sub(arch.re_reg, "<reg>", row)
         row = re.sub(arch.re_sprel, "addr(sp)", row)
         if mnemonic in arch.instructions_with_address_immediates:
@@ -2740,8 +2743,6 @@ def process(dump: str, config: Config) -> List[Line]:
                 else:
                     branch_target = int(args.split(",")[-1], 16)
 
-        row = processor.normalize(mnemonic, row)
-        
         output.append(
             Line(
                 mnemonic=mnemonic,
