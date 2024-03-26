@@ -1795,8 +1795,9 @@ class AsmProcessorARM32(AsmProcessor):
         return row + "<ignore>"
 
     def _normalize_data_pool(self, row: str) -> str:
-        pool_match = re.search(ARM32_LOAD_POOL_PATTERN, row)
-        return pool_match.group(1) if pool_match else row
+        return row
+        #pool_match = re.search(ARM32_LOAD_POOL_PATTERN, row)
+        #return pool_match.group(1) if pool_match else row
 
     def post_process(self, lines: List["Line"]) -> None:
         lines_by_line_number = {}
