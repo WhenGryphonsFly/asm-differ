@@ -2616,7 +2616,6 @@ def process(dump: str, config: Config) -> List[Line]:
         data_pool_addr = None
         pool_match = re.search(ARM32_LOAD_POOL_PATTERN, row)
         if pool_match:
-            row = pool_match.group(1)
             offset = pool_match.group(3).split(" ")[0][1:]
             data_pool_addr = int(offset, 16)
 
@@ -2741,6 +2740,8 @@ def process(dump: str, config: Config) -> List[Line]:
                 else:
                     branch_target = int(args.split(",")[-1], 16)
 
+        row = processor.normalize(mnemonic, row)
+        
         output.append(
             Line(
                 mnemonic=mnemonic,
