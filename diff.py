@@ -3217,7 +3217,7 @@ def do_diff(lines1: List[Line], lines2: List[Line], config: Config) -> Diff:
                             line_prefix = "R"
                         else:
                             sym_color = BasicFormat.REGISTER
-                            line_prefix = line1.diff_row + " @@ " + line2.diff_row
+                            line_prefix = branchless1 + " @@ " + branchless2
                         line_color1 = line_color2 = sym_color
 
                 if same_target:
